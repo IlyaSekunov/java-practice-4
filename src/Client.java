@@ -1,7 +1,3 @@
-package client;
-
-import directions.Direction;
-
 public record Client(int id, int initialFloor, int targetFloor) {
     public Direction getDirection() {
         if (targetFloor > initialFloor) {

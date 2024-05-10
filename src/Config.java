@@ -1,5 +1,3 @@
-package config;
-
 public class Config {
     public static int ELEVATOR_CAPACITY = 5;
     public static int ELEVATOR_DELAY_MS = 1000;

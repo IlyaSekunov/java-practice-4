@@ -1,10 +1,3 @@
-package elevatormanager;
-
-import client.Client;
-import config.Config;
-import directions.Direction;
-import elevator.Elevator;
-
 import java.util.Optional;
 import java.util.Queue;
 

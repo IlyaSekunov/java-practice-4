@@ -1,9 +1,3 @@
-package clientproducer;
-
-import client.Client;
-import config.Config;
-import logger.Logger;
-
 import java.util.Date;
 import java.util.Queue;
 import java.util.Random;

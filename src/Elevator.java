@@ -1,10 +1,3 @@
-package elevator;
-
-import client.Client;
-import config.Config;
-import directions.Direction;
-import logger.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
