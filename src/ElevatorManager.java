@@ -41,7 +41,7 @@ public class ElevatorManager implements Runnable {
 
     private boolean shouldTakeClient(Elevator elevator, Client client) {
         if (client.initialFloor() == elevator.getCurrentFloor()) {
-            if (elevator.getDirection() == Direction.NONE) {
+            if (elevator.isStopped()) {
                 return true;
             }
             return client.getDirection() == elevator.getDirection();
