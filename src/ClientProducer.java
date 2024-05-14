@@ -39,10 +39,12 @@ public class ClientProducer implements Runnable {
             try {
                 var delay = random.nextInt(averageDelayMs - dispersionDelayMs, averageDelayMs + dispersionDelayMs + 1);
                 Thread.sleep(delay);
-                if (clients.size() < Config.MAX_CLIENTS_IN_QUEUE) {
-                    var nextClient = nextClient();
-                    clients.add(nextClient);
-                    Logger.log("New client appeared - " + nextClient);
+                synchronized (clients) {
+                    if (clients.size() < Config.MAX_CLIENTS_IN_QUEUE) {
+                        var nextClient = nextClient();
+                        clients.add(nextClient);
+                        Logger.log("New client appeared - " + nextClient);
+                    }
                 }
             } catch (InterruptedException ignored) {
                 return;

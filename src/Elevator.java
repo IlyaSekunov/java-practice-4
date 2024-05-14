@@ -20,10 +20,6 @@ public class Elevator {
         return currentFloor;
     }
 
-    public int getTargetFloor() {
-        return targetFloor;
-    }
-
     public void setTargetFloor(int targetFloor) {
         this.targetFloor = targetFloor;
         Logger.log("Elevator-" + id + ": target floor now is " + targetFloor);
@@ -107,5 +103,13 @@ public class Elevator {
                 .toList();
         clientsLanded.forEach(client -> Logger.log("Elevator-" + id + ": client - " + client + " landed"));
         currentClients.removeAll(clientsLanded);
+    }
+
+    public boolean isGoingTo(Client client) {
+        return targetFloor == client.initialFloor();
+    }
+
+    public boolean isNotGoingTo(Client client) {
+        return !isGoingTo(client);
     }
 }

@@ -33,10 +33,12 @@ public class ElevatorManager implements Runnable {
     }
 
     private void collectPassengers(Elevator elevator) {
-        var clientsToBeCollected = clients.stream()
-                .filter(client -> shouldTakeClient(elevator, client) && elevator.addClient(client))
-                .toList();
-        clients.removeAll(clientsToBeCollected);
+        synchronized (clients) {
+            var clientsToBeCollected = clients.stream()
+                    .filter(client -> shouldTakeClient(elevator, client) && elevator.addClient(client))
+                    .toList();
+            clients.removeAll(clientsToBeCollected);
+        }
     }
 
     private boolean shouldTakeClient(Elevator elevator, Client client) {
@@ -50,9 +52,11 @@ public class ElevatorManager implements Runnable {
     }
 
     private Optional<Client> firstNotOnThePath(Elevator elevator) {
-        return clients.stream()
-                .filter(client -> client.initialFloor() != elevator.getTargetFloor() && client.getDirection() != elevator.getDirection())
-                .findFirst();
+        synchronized (clients) {
+            return clients.stream()
+                    .filter(client -> elevator.isNotGoingTo(client) && client.getDirection() != elevator.getDirection())
+                    .findFirst();
+        }
     }
 
     @Override
